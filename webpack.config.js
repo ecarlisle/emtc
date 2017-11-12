@@ -14,7 +14,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // Paths
 const sourcePath = path.resolve(__dirname, 'src');
 const buildPath = path.resolve(__dirname, 'static');
-const cssPath = path.resolve(buildPath, 'css');
+const cssPath = path.resolve(buildPath, 'scss');
+const imgPath = path.resolve(buildPath, 'img');
 const jsPath = path.resolve(buildPath, 'js');
 
 module.exports = {
@@ -69,7 +70,7 @@ module.exports = {
 		app: [
 			'normalize.css/normalize.css',
 			'./scss/main.scss',
-			'./scss/wee-grid.css',
+			'wee-grid/dist/wee-grid.css',
 			'jquery',
 			'./js/main.js',
 		],
