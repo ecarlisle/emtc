@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 // Configure Express server.
 const express = require('express'),
 	app = express(),
-	port = 3000
+	port = 80
 
 // Set routes for static files.
 app.use('/', express.static('static'))
@@ -28,7 +28,7 @@ let pool;
 const startApp = async () => {
 	try {
 		pool = await sql.connect(dbConfig)
-		app.listen(3000)
+		app.listen(80)
 	} catch(err) {
 
 		// NOTE: Actual error reporting would need to be a lot stronger.
