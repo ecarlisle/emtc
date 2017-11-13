@@ -1,0 +1,42 @@
+<form>
+<table>
+	<tr>
+		<th>
+			ID
+		</th>
+		<th>
+			Category
+		</th>
+		<th>
+			Finish
+		</th>
+		<th>
+			Size
+		</th>
+		<th>
+			Quantity
+		</th>
+	</tr>
+	{{#each .}}
+	<tr>
+		<td>
+			{{ InventoryId }}
+		</td>
+		<td>
+			{{ CategoryName }}
+		</td>
+		<td>
+			<div class="color-square" style="background-color: #{{FinishHex}}"></div>
+			{{ FinishName }}
+		</td>
+		<td>
+			{{ SizeName }}
+		</td>
+		<td>
+			<input type="text" class="quantity rmar1" value="{{ Quantity }}" /><i class="fa fa-save" data-id="{{ InventoryId }}"></i>
+
+		</td>
+	</tr>
+	{{/each}}
+</table>
+</form>
