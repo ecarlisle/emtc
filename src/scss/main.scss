@@ -1,0 +1,146 @@
+/* ---------- CONFIGURATION ---------- */
+
+// Colors
+$black: #333;
+$white: #fff;
+$blue: #428BCA;
+$light-blue: lighten($blue, 30);
+$lightest-blue: lighten($blue, 40);
+$lighter-gray: #aaa;
+
+/* ---------- GENERAL DOM OBJECTS ---------- */
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.6rem;
+}
+
+h1 {
+	font-size: 3rem;
+	margin: 2rem 1rem;
+}
+
+main {
+	padding: 1rem 3rem;
+}
+
+ul {
+	list-style-type: square;
+}
+
+table {
+	border-collapse: collapse;
+	tr:nth-child(odd) {
+		background: $lightest-blue;
+	}
+
+
+	th, td {
+		border: solid 1px $lighter-gray;
+		padding: 1rem;
+	}
+	th {
+		text-align: left;
+		background: $light-blue;
+	}
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+	font-family: 'Oswald', san-serif;
+	background: $blue;
+	color: $white;
+	padding: 3rem;
+
+	.title {
+		font-size: 3rem;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+	}
+
+	a {
+		color: $white;
+		text-decoration: none;
+		text-transform: uppercase;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+nav ul {
+	letter-spacing: 1px;
+	font-size: 1.6rem;
+	list-style-type: none;
+	margin: 0;
+	padding: 1rem 0 0;
+	li {
+		display: inline-block;
+		margin-left: 2rem;
+	}
+}
+
+/* ---------- LAYOUT ---------- */
+
+// Floats and clears
+.cf:before, .cf:after {
+	content: " ";
+	display: table;
+}
+
+.cf:after {
+	clear: both;
+}
+
+.rfloat {
+	float: right;
+}
+
+.lfloat {
+	float: left;
+}
+
+// Padding adjusters
+@for $i from 0 through 3 {
+	.pad#{$i} { padding: #{$i}rem; }
+	.tpad#{$i} { padding-top: #{$i}rem; }
+	.rpad#{$i} { padding-right: #{$i}rem; }
+	.bpad#{$i} { padding-bottom: #{$i}rem; }
+	.lpad#{$i} { padding-left: #{$i}rem; }
+}
+
+// Margin adjusters
+@for $i from 0 through 3 {
+	.mar#{$i} { padding: #{$i}rem; }
+	.tmar#{$i} { margin-top: #{$i}rem; }
+	.rmar#{$i} { margin-right: #{$i}rem; }
+	.bmar#{$i} { margin-bottom: #{$i}rem; }
+	.lmar#{$i} { margin-left: #{$i}rem; }
+}
+
+/* ---------- ICONS ---------- */
+.fa-save {
+	cursor: pointer;
+}
+
+
+
+/* ---------- COMPONENTS ---------- */
+
+.color-square {
+	border: solid 1px $lighter-gray;
+	display: inline-block;
+	height: 1.2rem;
+	margin-right: 1rem;
+	width: 1.2rem;
+}
