@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "sudo nodemon server.js && webpack --colors --progress",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "sudo node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,10 @@
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
+    "handlebars": "^4.0.11",
+    "handlebars-loader": "^1.6.0",
+    "jquery": "^3.2.1",
+    "jshint": "^2.9.5",
     "jshint-loader": "^0.8.4",
     "nodemon": "^1.12.1",
     "normalize.css": "^7.0.0",
@@ -33,7 +38,9 @@
     "wee-grid": "^1.1.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mssql": "^4.1.0"
+    "mssql": "^4.1.0",
+    "node-sass": "^4.6.1"
   }
 }
