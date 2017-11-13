@@ -15,8 +15,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const sourcePath = path.resolve(__dirname, 'src');
 const buildPath = path.resolve(__dirname, 'static');
 const cssPath = path.resolve(buildPath, 'scss');
-const imgPath = path.resolve(buildPath, 'img');
 const jsPath = path.resolve(buildPath, 'js');
+const imgPath = path.resolve(buildPath, 'img');
 
 module.exports = {
 	module: {
@@ -28,6 +28,14 @@ module.exports = {
 				use: [
 					{
 						loader: 'jshint-loader'
+					}
+				],
+			},
+			{
+				test: /\.handlebars$/,
+				use: [
+					{
+						loader: 'handlebars-loader'
 					}
 				],
 			},
@@ -67,23 +75,45 @@ module.exports = {
 	},
 	context: sourcePath,
 	entry: {
-		app: [
+		main: [
 			'normalize.css/normalize.css',
 			'./scss/main.scss',
-			'wee-grid/dist/wee-grid.css',
-			'jquery',
+			'./templates/header.handlebars',
 			'./js/main.js',
+		],
+		customer: [
+			'./js/customer.js',
+		],
+		editor: [
+			'./js/editor.js',
+		],
+		inventory: [
+			'./templates/inventory.handlebars',
+			'./js/inventory.js',
 		],
 	},
 	output: {
 		path: path.resolve(buildPath),
-		filename: './js/main.js',
+		filename: './js/[name].js',
+	},
+	externals: {
+		jquery: 'jQuery'
 	},
 	watch: true,
 	devtool: 'source-map',
 	plugins: [
 		new CleanWebpackPlugin([buildPath], {}),
 		new ExtractTextPlugin('./css/main.css'),
+		new CopyWebpackPlugin([
+			{
+				from: path.resolve(sourcePath, 'html'),
+				to: buildPath,
+			},
+			{
+				from: path.resolve(sourcePath, 'img'),
+				to: imgPath,
+			},
+		]),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
