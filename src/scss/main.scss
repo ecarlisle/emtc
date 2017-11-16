@@ -3,6 +3,7 @@
 // Colors
 $black: #333;
 $white: #fff;
+$dark-blue: darken(#428BCA, 30);
 $blue: #428BCA;
 $light-blue: lighten($blue, 30);
 $lightest-blue: lighten($blue, 40);
@@ -131,6 +132,7 @@ nav ul {
 /* ---------- ICONS ---------- */
 .fa-save {
 	cursor: pointer;
+	color: $dark-blue
 }
 
 
