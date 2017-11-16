@@ -51,41 +51,60 @@ app.get('/api/v1/widgets', function(req, res) {
 		try {
 			const results = await doQuery(`SELECT i.InventoryId, c.CategoryName, s.SizeName, f.FinishName, f.FinishHex , i.Quantity
 																		 FROM dbo.widget_inventory i
-																		 JOIN widget_sizes s ON s.SizeId = i.SizeId
-																		 JOIN widget_categories c ON c.CategoryId = i.CategoryId
-																		 JOIN widget_finishes f ON  f.FinishId = i.SizeId`)
-			res.send(results);
+																		 INNER JOIN dbo.widget_sizes s ON s.SizeId = i.SizeId
+																		 INNER JOIN dbo.widget_categories c ON c.CategoryId = i.CategoryId
+																		 INNER JOIN dbo.widget_finishes f ON  f.FinishId = i.FinishId
+																		 ORDER BY i.InventoryId ASC`)
+			res.send(results)
 		} catch(err) {
 			res.sendStatus(400)
 		}
-	})();
+	})()
 })
+
+// Return widget categories.
+app.get('/api/v1/categories', function(req, res) {
+	(async () => {
+		res.setHeader('Content-Type', 'application/json')
+		try {
+			const results = await doQuery(`SELECT CategoryId, CategoryName
+																		 FROM dbo.widget_categories
+																		 ORDER BY CategoryId ASC`)
+			res.send(results)
+		} catch(err) {
+			res.sendStatus(400)
+		}
+	})()
+})
+
+
 
 // Update the quantity of a category item.
 app.put('/api/v1/widgets/item', jsonParser, function(req, res) {
 	(async () => {
 		res.setHeader('Content-Type', 'application/json')
-		const paramQuantity = req.params.quantity
-		const paramId = req.params.id
-		console.log(req);
+		const paramQuantity = req.body.quantity
+		const paramId = req.body.id
 		try {
+			console.log(req.body);
+
 			const ps = new sql.PreparedStatement(pool)
 			ps.input('quantity', sql.Int)
 			ps.input('id', sql.Int)
 			ps.prepare(`UPDATE dbo.widget_inventory
 									SET Quantity = @quantity
 									WHERE InventoryId = @id`, err => {
+
 			// TODO: Error checks
-
-					ps.execute({quantity: paramQuantity, id: paramId}, (err, result) => {
-					// TODO: Error checks
-
-						ps.unprepare(err => {
-						// TODO: Error checks
+			ps.execute({quantity: paramQuantity, id: paramId}, (err, result) => {
+				// TODO: error handling
+					ps.unprepare(err => {
+						// TODO: error handling
 					})
+					res.send(result);
 				})
 			})
-			res.send(true);
+
 		} catch(err) {
 			res.sendStatus(400)
 		}
